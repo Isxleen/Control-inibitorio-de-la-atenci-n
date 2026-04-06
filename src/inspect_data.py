@@ -1,8 +1,8 @@
 import pandas as pd
 import os
 
-data_dir = r"c:\Users\alion\OneDrive\Escritorio\Control inibitorio de la atención\data\raw"
-files = ["subject_level_dataset.csv", "Raw_Flanker.xlsx", "Raw_Stroop.xlsx"]
+data_dir = r"c/Users/isabelsalinas/Documents/Documentos TFG/TFG-Control_inhibitorio_atencion/data/raw"
+files = ["Raw_Sart.xlsx", "Raw_Flanker.xlsx", "Raw_Stroop.xlsx"]
 
 for f in files:
     path = os.path.join(data_dir, f)

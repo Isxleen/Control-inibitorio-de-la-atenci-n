@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-import shap
+import shap as shap
 import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix
@@ -22,24 +22,19 @@ def plot_shap_summary(model, X, model_type='tree'):
     Genera gráficos SHAP para interpretar el modelo.
     Soporta TreeExplainer (RF, XGB) y KernelExplainer (Otros).
     """
-    print("Calculando valores SHAP...")
-    
-    # Manejo específico para pipelines o stacking si es complejo, 
-    # pero aquí asumimos un modelo base o el mejor estimador.
-    
     try:
         if model_type == 'tree':
             explainer = shap.TreeExplainer(model)
             shap_values = explainer.shap_values(X)
         else:
-            # Kernel explainer es lento, usar subsample si es necesario
             explainer = shap.KernelExplainer(model.predict_proba, X)
             shap_values = explainer.shap_values(X)
-            
-        plt.figure()
-        shap.summary_plot(shap_values, X, show=False)
-        plt.title("Importancia de Características (SHAP)")
+
+
+        shap.summary_plot(shap_values, X, show=False, plot_size=(12, 8), max_display=15)
+
         plt.show()
+
     except Exception as e:
         print(f"No se pudo generar SHAP automáticamente: {e}")
 
